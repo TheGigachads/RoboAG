@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Arduino
+Comment=Arduino IDE 2
+Exec=bash -c "/usr/local/bin/Arduino/arduino-ide_2*_Linux_64bit.AppImage"
+Terminal=false
+Type=Application
+Icon=/usr/local/bin/Arduino/logo.png

@@ -1,5 +1,5 @@
-#ifndef ROBO_H
-#define ROBO_H
+#ifndef ROBOAG_H
+#define ROBOAG_H
 #include <Arduino.h>
 #include <FastLED.h>
 #include <ArduinoLog.h>
@@ -29,7 +29,7 @@ void setupSensors();
 void setupSensors(uint8_t outerLeftSensor, uint8_t innerLeftSensor, uint8_t innerRightSensor, uint8_t outerRightSensor);
 
 void enableIRSensor();
-void printSensorValues();
+
 bool isOuterLeftBlack();
 bool isOuterRightBlack();
 bool isInnerLeftBlack();
@@ -52,5 +52,7 @@ void ledIntersectionDone();
 // utility functions
 void disableLogging();
 void printPinout();
+void printSensorValues();
+void printCurrentDistance();
 
-#endif // ROBO_H
+#endif // ROBOAG_H

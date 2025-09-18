@@ -25,8 +25,10 @@ uint8_t innerRightLED = 3;
 uint8_t outerRightLED = 4;
 bool isIRSensor = false;
 
-UltraSonicDistanceSensor distanceSensor(7, 9); // trigger/echo
-float lastDistance = 400;
+UltraSonicDistanceSensor distanceSensor(7, 9);  // trigger/echo
+unsigned int lastDistance = 400;
+unsigned long lastDistanceCheck = 0;
+const int MIN_DISTANCE_CHECK_MS = 30;
 
 CRGB leds[numberOfLeds];
 
@@ -145,11 +147,17 @@ bool isSilver() {
 }
 
 int getDistanceInMM() {
-  float currentDistance = distanceSensor.measureDistanceCm();
-  if (currentDistance != -1) {
-    lastDistance = currentDistance;
+  if (millis() - lastDistanceCheck > MIN_DISTANCE_CHECK_MS) {
+    lastDistanceCheck = millis();
+    float currentDistance = distanceSensor.measureDistanceCm();
+    if (currentDistance >= 0) {
+      lastDistance = currentDistance*10;
+    }
   }
-  return lastDistance * 100;
+  return lastDistance;
+}
+void printCurrentDistance() {
+  Log.noticeln(F("Distanz: %d mm"), getDistanceInMM());
 }
 
 void ledAllOff() {
